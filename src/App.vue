@@ -1,20 +1,30 @@
 <script setup lang="ts">
 import '@assets/main.css'
 
-import AppFooter from "@components/AppFooter.vue"
-import AppHeader from "@components/AppHeader.vue"
+import { RouterView } from 'vue-router';
 
 </script>
 
 <template>
-    <AppHeader/>
-    <main>
+    <div id="app" class="flowV">
         <RouterView/>
-    </main>
-    <AppFooter/>
+    </div>
 </template>
 
-<style scoped>
+<style>
 
+:root {
+    --app-v-margin: 1em;
+    --flow-v-space: var(--app-v-margin);
+    --header-height: 6em;
+    --footer-height: var(--nav-height);
+
+    --first-header-height: calc(var(--header-height) * 0.64);
+    --nav-height: calc(var(--header-height) - var(--first-header-height));
+}
+
+main {
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
+}
 
 </style>

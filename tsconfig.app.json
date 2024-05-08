@@ -11,8 +11,12 @@
       "@/*": ["./src/*"],
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
+      "@composables/*": ["./src/composables/*"],
       "@views/*": ["./src/views/*"],
       "@img/*": ["./src/assets/img/*"],
+      "@fonts/*": ["./src/assets/fonts/*"],
+      "@props/*": ["./src/props/*"],
+      "@fetch/*": ["./src/fetch/*"]
     }
   }
 }
