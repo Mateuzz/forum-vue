@@ -7,15 +7,13 @@ import MemberListItem from "@/components/MemberListItem.vue"
 import ButtonIcon from "@/components/ButtonIcon.vue"
 import ModifiersBar from "@/components/ModifiersBar.vue"
 import ErrorBox from '@/components/ErrorBox.vue'
+import PaginatedArticle from "@/components/PaginatedArticle.vue"
 
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
-import { reactive, ref, watch } from "vue"
+import { computed, reactive, ref, watch } from "vue"
 import { getResourcePath, urlQuery } from "@/api/Api.js"
-import type { PaginatedList } from "@/Models/PaginatedList.js"
-import type { User } from "@/api/auth.js"
 import { updateRouteNoScroll } from "@/util/route.js"
 import { useRoute } from "vue-router"
-import { fetchJson } from "@/api/Fetch.js"
 
 const route = useRoute()
 
@@ -27,21 +25,13 @@ const modifiers = reactive({
 
 const searchModel = ref('')
 const error = ref('')
-const membersPage = ref < PaginatedList<User> > ()
 
-updatePage()
+const url = computed(() => `${getResourcePath('user')}?${urlQuery(modifiers)}`)
 
 watch(modifiers, () => {
     const query = Object.assign({...route.query}, modifiers)
     updateRouteNoScroll(route.path, query)
-    updatePage()
 })
-
-async function updatePage() {
-    fetchJson(`${getResourcePath('user')}?${urlQuery(modifiers)}`)
-        .then(json => membersPage.value = json as PaginatedList<User>)
-        .catch(e => error.value = "Failed to fetch members: " + (e.message || e))
-}
 
 </script>
 <template>
@@ -92,11 +82,10 @@ async function updatePage() {
 
             <ErrorBox :error="error"/>
 
-            <ul :class="$style.memberCardList" v-if="membersPage">
-                <li v-for="member in membersPage.data">
-                    <MemberListItem v-bind="member"/>
-                </li>
-            </ul>
+            <PaginatedArticle :class="$style.memberCardList"
+                              :url v-slot="{ data: member }" @error="(e: string) => error = e">
+                <MemberListItem v-bind="member"/>
+            </PaginatedArticle>
         </main>
 
     </div>

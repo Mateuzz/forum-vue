@@ -3,10 +3,10 @@ import type { RouteLocationNormalizedLoaded } from "vue-router";
 
 export default function usePostListModifiers(route: RouteLocationNormalizedLoaded) {
     return reactive({
-        category: route.params['slug'],
-        search: route.query.search,
-        'results-per-page': route.query['results-per-page'] || '15',
-        order: route.query.order || 'latest',
+        category: route.params['slug'] as string,
+        search: route.query.search as string,
+        'results-per-page': route.query['results-per-page'] as string || '15',
+        order: route.query.order as string || 'latest',
         user: ''
     })
 }

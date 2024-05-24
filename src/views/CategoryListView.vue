@@ -1,6 +1,5 @@
 <script setup lang="ts">
 
-
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import CategoryListItem from "@/components/CategoryListItem.vue";
@@ -27,8 +26,8 @@ fetchJson(`${getResourcePath('category')}?with-recent-post=true`)
 
     <div class="container" :class="$style.wrapper">
         <main class="flowV" id="$style.main">
-            <CategoryListItem v-for="category in categoriesJson.categories" v-bind="category" />
             <ErrorBox :error="error"/>
+            <CategoryListItem v-for="category in categoriesJson.categories" v-bind="category" />
         </main>
 
         <aside id="$style.aside">

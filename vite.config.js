@@ -4,7 +4,6 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig((command) => {
-    // const isProduction = /build|preview/
     return {
         server: {
             port: 8080
@@ -17,7 +16,6 @@ export default defineConfig((command) => {
         },
         plugins: [
             vue({ 
-                // isProduction 
             }),
         ],
         resolve: {
@@ -29,7 +27,6 @@ export default defineConfig((command) => {
                 '@img': fileURLToPath(new URL('./src/assets/img', import.meta.url)),
                 '@fonts': fileURLToPath(new URL('./src/assets/fonts', import.meta.url)),
                 '@composables': fileURLToPath(new URL('./src/composables', import.meta.url)),
-                '@fetch': fileURLToPath(new URL('./src/fetch', import.meta.url)),
                 '@props': fileURLToPath(new URL('./src/props', import.meta.url)),
             }
         }

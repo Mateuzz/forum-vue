@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
-import { computed, ref } from 'vue';
-import type { AppInputProps as Props } from '@/Models/AppInput.js';
+import { computed, ref } from 'vue'
+import type { AppInputProps as Props } from '@/Models/AppInput.js'
 
 const props = withDefaults(defineProps<Props>(), {
     validateOnInput: false,
@@ -13,7 +13,7 @@ const input = ref<HTMLInputElement | null>(null)
 
 const id = computed(() => props.id ?? props.name)
 
-defineExpose({ onSubmit, error, model, setError })
+defineExpose({ onSubmit, error, model, setError, input })
 
 function setError(value: string) {
     error.value = value
@@ -47,17 +47,10 @@ async function onInput() {
 </script>
 
 <template>
-    <input v-model="model"
-    v-bind="$attrs"
-    :class="$style.input"
-    :id="id"
-    :name="$props.name"
-    @input="onInput"
-    ref="input" >
+    <input v-model="model" :class="$style.input" :id :name="name" @input="onInput" ref="input">
 </template>
 
 <style module>
-
 .input {
     background-color: var(--outerspace);
     color: var(--bone);
@@ -69,5 +62,4 @@ async function onInput() {
 .input:focus {
     box-shadow: 0 0 2px 1px var(--bone);
 }
-
 </style>

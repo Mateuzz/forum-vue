@@ -1,3 +1,5 @@
+import { baseUrl, apiUrl } from "@/config"
+
 export type QueryValue = string |  number | null | undefined | boolean
 export type Query = Record<string, QueryValue | QueryValue[]> 
 
@@ -14,13 +16,6 @@ const resources  = {
 
 type ResourceName = keyof typeof resources
 
-export const api = {
-    host: 'localhost',
-    port: 8000,
-    baseApiUrl: 'http://localhost:8000/api',
-    baseUrl: 'http://localhost:8000',
-} as const
-    
 export function getResourcePath(name: ResourceName) {
     let value : ResourceKey = resources[name]
     let inApi = true
@@ -31,8 +26,8 @@ export function getResourcePath(name: ResourceName) {
     }
 
     if (inApi)
-        return `${api.baseApiUrl}/${value}`
-    return `${api.baseUrl}/${value}`
+        return `${apiUrl}/${value}`
+    return `${baseUrl}/${value}`
 }
 
 export function urlQuery(query: Query): string {
@@ -58,7 +53,7 @@ export function urlQuery(query: Query): string {
 function queryHasValue(o: string | number | undefined | null | boolean): o is string | number | boolean {
     if (o == null)
         return false
-    if (typeof o === 'string')
-        return !!o.length
-    return true
+    if (typeof o === 'number')
+        return true
+    return !!o
 }
