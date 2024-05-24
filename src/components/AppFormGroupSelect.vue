@@ -2,8 +2,7 @@
 
 import AppSelect from './AppSelect.vue'
 
-import { type ComponentPublicInstance, type Ref } from 'vue';
-import type { AppInputInstance, AppSelectInstance } from '@/models/AppForm.js';
+import type { AppSelectInstance } from '@/models/AppForm.js';
 
 type Props = {
     label: string
@@ -11,7 +10,7 @@ type Props = {
 }
 
 const props = defineProps<Props>()
-const model = defineModel<AppInputInstance>()
+const model = defineModel<AppSelectInstance>()
 
 </script>
 

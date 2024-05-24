@@ -14,7 +14,7 @@ import { fetchJson } from '@/api/Fetch.js'
 import { useRoute } from 'vue-router'
 import { updateRouteNoScroll } from '@/util/route.js'
 import usePostListModifiers from '@/composables/PostList.js'
-import { PostListModifiers } from '@/Models/PostList.js'
+import type { PostListModifiers } from '@/Models/PostList.js'
 
 const props = defineProps<{
     id: string

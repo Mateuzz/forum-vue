@@ -5,7 +5,7 @@ type GetCsrfTokenResponse = {
     'csrf-token': string,
 }
 
-let csrfToken = ''
+let csrfToken : string
 
 function getInit(init?: RequestInit) {
     if (init) {
@@ -33,7 +33,7 @@ async function newCsrfToken() : Promise<string> {
 }
 
 async function getCsrfToken() : Promise<string> {
-    return csrfToken || (csrfToken = await newCsrfToken())
+    return csrfToken ?? (csrfToken = await newCsrfToken())
 }
 
 export async function apiFetch(url: string, init?: RequestInit) : Promise<Response> {

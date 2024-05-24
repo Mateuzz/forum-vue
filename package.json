@@ -26,6 +26,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/vue-fontawesome": "^3.0.6",
+    "hyperid": "^3.2.0",
     "jquery": "^3.7.1",
     "quill": "^2.0.0",
     "vue": "^3.4.21",

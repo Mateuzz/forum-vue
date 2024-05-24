@@ -14,13 +14,12 @@ const resources  = {
 
 type ResourceName = keyof typeof resources
 
-export const api = {
-    host: 'localhost',
-    port: 8000,
-    baseApiUrl: 'http://localhost:8000/api',
-    baseUrl: 'http://localhost:8000',
-} as const
-    
+const port = 80
+const host = 'api.localhost'
+const protocol = 'http'
+const baseUrl = `${protocol}://${host}:${port}`
+const apiUrl = `${baseUrl}/api`
+
 export function getResourcePath(name: ResourceName) {
     let value : ResourceKey = resources[name]
     let inApi = true
@@ -31,8 +30,8 @@ export function getResourcePath(name: ResourceName) {
     }
 
     if (inApi)
-        return `${api.baseApiUrl}/${value}`
-    return `${api.baseUrl}/${value}`
+        return `${apiUrl}/${value}`
+    return `${baseUrl}/${value}`
 }
 
 export function urlQuery(query: Query): string {
