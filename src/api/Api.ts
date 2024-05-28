@@ -16,6 +16,15 @@ const resources  = {
 
 type ResourceName = keyof typeof resources
 
+<<<<<<< HEAD
+=======
+const port = 80
+const host = 'api.localhost'
+const protocol = 'http'
+const baseUrl = `${protocol}://${host}:${port}`
+const apiUrl = `${baseUrl}/api`
+
+>>>>>>> 0efb2cbb4a8d1bf4449decc695b91a1cb3f22c39
 export function getResourcePath(name: ResourceName) {
     let value : ResourceKey = resources[name]
     let inApi = true
