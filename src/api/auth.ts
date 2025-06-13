@@ -2,7 +2,7 @@ import cookies from "@/data/cookies.js";
 import { getCookie } from "@/util/cookie.js";
 import { ref } from "vue";
 import { getResourcePath } from "./Api.js";
-import { authFetch, sessionFetch } from "./Fetch.js";
+import { sessionFetch } from "./Fetch.js";
 
 export type User = {
     id: Number,
@@ -22,7 +22,7 @@ export type User = {
     updated_at: string,
 }
 
-export type ValidationResponse = {
+type ValidationResponse = {
     message: string,
     errors?: {
         [index: string]: string[]
@@ -32,6 +32,7 @@ export type ValidationResponse = {
 }
 
 export type AuthResult = {
+    validated: boolean,
     message?: string,
     errors?: {
         [index: string]: string[]
@@ -49,6 +50,7 @@ export class Auth {
 
         if (!token)
             return {
+                validated: false,
                 message: "Could not make login: Login cookie not saved",
             }
 
@@ -63,15 +65,17 @@ export class Auth {
 
             if (json.user) {
                 this.saveUser(json, false)
-                return {}
+                return { validated: true }
             }
 
             return {
+                validated: false,
                 message: json.message,
                 errors: json.errors
             }
         } catch (e) {
             return {
+                validated: false,
                 message: "Could not make login: " + (e as Error).message,
             }
         }
@@ -94,15 +98,17 @@ export class Auth {
 
             if (json.user) {
                 this.saveUser(json, true)
-                return {}
+                return { validated: true }
             }
 
             return {
+                validated: false,
                 message: json.message,
                 errors: json.errors,
             }
         } catch (e) {
             return {
+                validated: false,
                 message: (e as Error).message
             }
         }
@@ -126,15 +132,17 @@ export class Auth {
 
             if (json.user) {
                 this.saveUser(json, true)
-                return {}
+                return { validated: true }
             }
 
             return {
+                validated: false,
                 message: json.message,
                 errors: json.errors
             }
         } catch (e) {
             return {
+                validated: false,
                 message: 'Could not create User:' + (e as Error).message,
             }
         }

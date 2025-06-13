@@ -44,7 +44,7 @@ async function onSubmit(formElement: HTMLFormElement, inputsWithError: AppInputI
         alert("User created successfully")
         router.push({ name: 'home' })
     } else {
-        username.value.setError(result.message)
+        username.value!.setError(result.message!)
     }
 }
 

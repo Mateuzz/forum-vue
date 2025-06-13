@@ -10,7 +10,6 @@ import { updateRouteNoScroll } from '@/util/route.js'
 import usePostListModifiers from '@/composables/PostList.js'
 
 const route = useRoute()
-
 const postModifiers = usePostListModifiers(route)
 
 watch(postModifiers, () => {
